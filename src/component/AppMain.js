@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import '../style/App.scss';
 import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 let styles = {
@@ -43,6 +44,7 @@ class AppMain extends React.Component {
             input: "",
             content: "",
             open: false,
+            progress:false,
         }
     }
 
@@ -51,9 +53,10 @@ class AppMain extends React.Component {
     };
 
     preview = () => {
-        console.log(this.state.input);
+        this.setState({progress:true});
         axios.post("http://api.kindlezhushou.com/preview", {url: this.state.input})
             .then((res) => {
+                this.setState({progress:false});
                 this.showData(res.data);
             })
     };
@@ -90,6 +93,7 @@ class AppMain extends React.Component {
                             附件
                         </Button>
                     </div>
+                    {this.state.progress? <CircularProgress/>:null}
                     <div>
                         <TextField
                             id="standard-password-input"
