@@ -44,7 +44,7 @@ function AppMain() {
                     id="standard-password-input"
                     label="请输入要推送的网址"
                     className={classes.textField}
-                    type="password"
+                    type="text"
                     autoComplete="current-password"
                     margin="normal"
                 />
@@ -64,7 +64,7 @@ function AppMain() {
                         id="standard-password-input"
                         label="请输入信任的邮箱"
                         className={classes.textField}
-                        type="password"
+                        type="text"
                         autoComplete="current-password"
                         margin="normal"
                     />
@@ -74,7 +74,7 @@ function AppMain() {
                         id="standard-password-input"
                         label="请输入Kindle接收邮箱"
                         className={classes.textField}
-                        type="password"
+                        type="text"
                         autoComplete="current-password"
                         margin="normal"
                     />
