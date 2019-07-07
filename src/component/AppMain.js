@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import '../style/App.scss';
 import axios from 'axios';
+import Dialog from '@material-ui/core/Dialog';
+
 
 let styles = {
     body: {
@@ -38,7 +40,9 @@ class AppMain extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            input: ""
+            input: "",
+            content: "",
+            open: false,
         }
     }
 
@@ -48,10 +52,18 @@ class AppMain extends React.Component {
 
     preview = () => {
         console.log(this.state.input);
-        axios.post("http://api.kindlezhushou.com/preview",{url:this.state.input})
-            .then((res)=>{
-                console.log(res.data);
+        axios.post("http://api.kindlezhushou.com/preview", {url: this.state.input})
+            .then((res) => {
+                this.showData(res.data);
             })
+    };
+
+    showData = (data) => {
+        this.setState({content: data.content, open: true});
+    }
+
+    handleClose = () => {
+        this.setState({open: false});
     };
 
     render() {
@@ -99,6 +111,10 @@ class AppMain extends React.Component {
                         />
                     </div>
                 </div>
+                <Dialog open={this.state.open} onClose={this.handleClose}>
+                    <div dangerouslySetInnerHTML={{__html: this.state.content}}/>
+                </Dialog>
+
             </div>
         )
     }
