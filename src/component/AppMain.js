@@ -1,13 +1,12 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import {makeStyles} from '@material-ui/core/styles';
 import '../style/App.scss';
 
-const useStyles = makeStyles(theme => ({
-    body:{
+let styles = {
+    body: {
         display: 'flex',
-        width:'100%',
+        width: '100%',
         textAlign: 'center',
         justifyContent: 'center',
     },
@@ -20,8 +19,6 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
     },
     textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
         width: '100%',
     },
     dense: {
@@ -33,55 +30,73 @@ const useStyles = makeStyles(theme => ({
     button: {
         marginRight: 50,
     }
-}));
+};
 
-function AppMain() {
-    const classes = useStyles();
-    return (
-        <div className={classes.body}>
-            <div className={classes.container}>
-                <TextField
-                    id="standard-password-input"
-                    label="请输入要推送的网址"
-                    className={classes.textField}
-                    type="text"
-                    autoComplete="current-password"
-                    margin="normal"
-                />
-                <div>
-                    <Button className='button' variant="contained" color="primary">
-                        发送
-                    </Button>
-                    <Button className='button' variant="contained" color="primary">
-                        预览
-                    </Button>
-                    <Button className='button' variant="contained" color="primary">
-                        附件
-                    </Button>
-                </div>
-                <div>
+class AppMain extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            input: ""
+        }
+    }
+
+    getInputValue = (e) => {
+        this.setState({input: e.target.value})
+    };
+
+    preview = () => {
+        console.log(this.state.input);
+    }
+
+    render() {
+        return (
+            <div style={styles.body}>
+                <div style={styles.container}>
                     <TextField
                         id="standard-password-input"
-                        label="请输入信任的邮箱"
-                        className={classes.textField}
+                        label="请输入要推送的网址"
+                        style={styles.textField}
                         type="text"
                         autoComplete="current-password"
                         margin="normal"
+                        onChange={this.getInputValue}
                     />
-                </div>
-                <div>
-                    <TextField
-                        id="standard-password-input"
-                        label="请输入Kindle接收邮箱"
-                        className={classes.textField}
-                        type="text"
-                        autoComplete="current-password"
-                        margin="normal"
-                    />
+                    <div>
+                        <Button style={styles.button} variant="contained" color="primary">
+                            发送
+                        </Button>
+                        <Button style={styles.button} variant="contained" color="primary" onClick={this.preview}>
+                            预览
+                        </Button>
+                        <Button style={styles.button} variant="contained" color="primary">
+                            附件
+                        </Button>
+                    </div>
+                    <div>
+                        <TextField
+                            id="standard-password-input"
+                            label="请输入信任的邮箱"
+                            style={styles.textField}
+                            type="text"
+                            autoComplete="current-password"
+                            margin="normal"
+                        />
+                    </div>
+                    <div>
+                        <TextField
+                            id="standard-password-input"
+                            label="请输入Kindle接收邮箱"
+                            style={styles.textField}
+                            type="text"
+                            autoComplete="current-password"
+                            margin="normal"
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        )
+    }
 }
 
 export default AppMain;
