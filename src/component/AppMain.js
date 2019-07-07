@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import '../style/App.scss';
+import axios from 'axios';
 
 let styles = {
     body: {
@@ -47,7 +48,11 @@ class AppMain extends React.Component {
 
     preview = () => {
         console.log(this.state.input);
-    }
+        axios.post("http://api.kindlezhushou.com/preview",{url:this.state.input})
+            .then((res)=>{
+                console.log(res.data);
+            })
+    };
 
     render() {
         return (
